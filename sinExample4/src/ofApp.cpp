@@ -13,25 +13,35 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    // circle formula
     
-    // x = xorig + radius * cos(angle);
-    // y = yorig + radius * sin(angle);
-    
-    float radius = ofMap(sin(ofGetElapsedTimef()*10), -1, 1, 0, 200);
-    float x = mouseX + radius * cos(ofGetElapsedTimef()*1);
-    float y = mouseY + radius * sin(ofGetElapsedTimef()*1);
-    
-    ofDrawCircle(x,y, 10);
-    
-    myLine.addVertex(ofPoint(x,y));
-    
-    if (myLine.size() > 200){
-        myLine.getVertices().erase(myLine.getVertices().begin());
+    for (int i = 0; i < 10; i++){
+        float xorig = 400;
+        float yorig = 400;
+        float radius = 100 + i * 20;
+        float angle = ofGetElapsedTimef() * ofMap(i, 0, 10, 1, 10);
+        float x = xorig + radius * cos(angle);
+        float y = yorig + radius * sin(angle);
+        ofDrawCircle(x,y, 20);
     }
     
-    myLine.draw();
+    //ofPolyline
     
+    
+//    float xorig = 400 + 200 * sin(ofGetElapsedTimef()*0.4);
+//    float yorig = 400;
+//    float radius = 100 + 100 * sin(ofGetElapsedTimef()*3.0);
+//    float angle = ofGetElapsedTimef();
+//    float x = xorig + radius * cos(angle);
+//    float y = yorig + radius * sin(angle);
+//
+//    trail.addVertex(x,y);
+//    trail.draw();
+//
+//    if (trail.size() > 200){
+//        trail.getVertices().erase(trail.getVertices().begin());
+//    }
+//
+//    ofDrawCircle(x,y, 10);
     
     
 }
@@ -39,6 +49,9 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+//    if (key == ' '){
+//        trail.clear();
+//    }
 }
 
 //--------------------------------------------------------------

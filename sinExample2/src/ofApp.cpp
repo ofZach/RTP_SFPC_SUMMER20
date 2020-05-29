@@ -3,8 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    
-    ofSetRectMode(OF_RECTMODE_CENTER);
 }
 
 //--------------------------------------------------------------
@@ -15,24 +13,26 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-   
-    // freq:
-//    for (int i = 0; i < 100; i++){
-//        ofDrawCircle( ofMap(sin(ofGetElapsedTimef()*(1+i/50.0)), -1,1,0, ofGetWidth()),
-//                      i*8, 5);
+    // --------- amplitude ---------
+    //    for (int i = 0; i < 80; i++){
+    //        float amt = ofMap(i, 0, 80, 0, 400);
+    //        float x = 400 + ofMap(sin(ofGetElapsedTimef()), -1, 1, -amt, amt);
+    //        ofDrawCircle(x, i*10, 5);
+    //    }
+    
+    // --------- frequency ---------
+//    for (int i = 0; i < 80; i++){
+//        float scale = ofMap(i, 0, 80, 0, 10);
+//        float x = ofMap(sin(ofGetElapsedTimef()*scale), -1, 1, 0, ofGetWidth());
+//        ofDrawCircle(x, i*10, 5);
 //    }
     
-    // phase
-//    for (int i = 0; i < 100; i++){
-//        ofDrawCircle( ofMap(sin(ofGetElapsedTimef() + mouseX), -1,1,0, ofGetWidth()),
-//                     i*8, 5);
-//    }
-    
-    // amplitude
-    for (int i = 0; i < 100; i++){
-        ofDrawCircle( ofMap( (i/100.0) * sin(ofGetElapsedTimef()), -1,1,0, ofGetWidth()),
-                     i*8, 5);
-    }
+    // --------- phase ---------
+    //float phaseShift = mouseX * 0.001;
+       for (int i = 0; i < 80; i++){
+           float x = ofMap(sin(ofGetElapsedTimef() + i*0.01), -1, 1, 0, ofGetWidth());
+           ofDrawCircle(x,i*10, 5);
+       }
     
 }
 

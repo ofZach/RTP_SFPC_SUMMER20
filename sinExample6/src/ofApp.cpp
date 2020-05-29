@@ -3,8 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    
-    ofSetRectMode(OF_RECTMODE_CENTER);
 }
 
 //--------------------------------------------------------------
@@ -15,22 +13,26 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    // -> sin(...);
-    // sin(...)
-    // Math.sin(...);
+    // additive
     
-    //float screenW = ofGetWidth();
-    //ofDrawRectangle( screenW/2.0 + sin(ofGetElapsedTimef()) * (screenW/2.0) , 100, 50, 50);
-    
-    
-    //ofMap(val, inputLow, inputHight, outputLow, outputHigh);
-    
-    ofDrawRectangle( ofMap(sin(ofGetElapsedTimef()*1), -1,1,0, ofGetWidth()),
-                    100,50,50);
+    float x = ofMap(sin(ofGetElapsedTimef())+
+                    sin(ofGetElapsedTimef()*4.72), -2, 2, 0, ofGetWidth());
+    ofDrawCircle(x, 400, 10);
     
     
+    // amplitude
+    
+//    float mod = ofMap(sin(ofGetElapsedTimef()), -1, 1, 0, 1);
+//    float x = ofMap(mod*sin(ofGetElapsedTimef()*5), -1, 1, 0, ofGetWidth());
+//    ofDrawCircle(x, 400, 10);
     
     
+    // frequency
+    
+//    float adder = ofMap(sin(ofGetElapsedTimef()), -1,1, 0.01, 0.15);
+//    time += adder;
+//    float x = ofMap( sin(time), -1, 1, 0, ofGetWidth());
+//    ofDrawCircle(x, 400, 10);
     
 }
 

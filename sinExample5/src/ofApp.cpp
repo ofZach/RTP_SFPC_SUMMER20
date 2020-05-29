@@ -13,26 +13,20 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    // circle formula
     
-    // x = xorig + radius * cos(angle);
-    // y = yorig + radius * sin(angle);
-    
-    float x = 300 + 200 * cos(ofGetElapsedTimef()*3.1);
-    float y = 300 + 200 * sin(ofGetElapsedTimef()*1.7);
-    
+    float xorig = 400;
+    float yorig = 400;
+    float radius = 300;
+    float angle = ofGetElapsedTimef();
+    float x = xorig + radius * cos(angle*3);
+    float y = yorig + radius * sin(angle*3.7);
     ofDrawCircle(x,y, 10);
     
-    myLine.addVertex(ofPoint(x,y));
-    
-    if (myLine.size() > 3500){
-        myLine.getVertices().erase(myLine.getVertices().begin());
+    trail.addVertex(x,y);
+    if (trail.size() > 600){
+        trail.getVertices().erase(trail.getVertices().begin());
     }
-    
-    myLine.draw();
-    
-    
-    
+    trail.draw();
 }
 
 //--------------------------------------------------------------

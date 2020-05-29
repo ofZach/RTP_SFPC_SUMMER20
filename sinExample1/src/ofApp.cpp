@@ -3,7 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    ofSetCircleResolution(100);
 }
 
 //--------------------------------------------------------------
@@ -14,16 +13,15 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    ofBackground(255);
-    float time = ofGetElapsedTimef();
+    cout << sin(ofGetElapsedTimef()) << endl;
     
-    for (int i = 0; i < 800; i++ ){
-        
-        ofSetColor(127 + 127 * sin(i*0.01),
-                   127 + 127 * sin(i*0.011),
-                   127 + 127 * sin(i*0.012));
-        ofDrawCircle(400 + 200 * sin(time + i*0.02) , i, 25 + 25 * sin(time + i *0.01));
-    }
+    float x = ofMap(sin(ofGetElapsedTimef()), -1, 1, 0, ofGetWidth());
+    ofDrawCircle(x, 400, 30);
+    
+//    float brightness = ofMap(sin(ofGetElapsedTimef()), -1, 1, 0, 255);
+//    ofSetColor(brightness);
+//    ofDrawCircle(400,400,100);
+    
 }
 
 //--------------------------------------------------------------
