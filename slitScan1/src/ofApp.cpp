@@ -9,7 +9,7 @@ void ofApp::setup(){
   img.allocate(grabber.getWidth(), grabber.getHeight(), OF_IMAGE_COLOR);
   #else
   video.setPixelFormat(OF_PIXELS_RGB);
-  video.load("input.mp4");
+  video.load("input.mov");
   video.setLoopState(OF_LOOP_NORMAL);
   video.play();
   img.allocate(video.getWidth(), video.getHeight(), OF_IMAGE_COLOR);
