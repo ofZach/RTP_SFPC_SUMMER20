@@ -3,35 +3,49 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    shader.load("", "shader.frag");
-    img.load("Cute-Red-Bunny.jpg");
-    grabber.setup(640,480);
-    
+  #ifdef _USE_LIVE_VIDEO
+  grabber.setup(640,480);
+  #else
+  video.setPixelFormat(OF_PIXELS_RGB);
+  video.load("input.mp4");
+  video.setLoopState(OF_LOOP_NORMAL);
+  video.play();
+  #endif    
+
+  shader.load("", "shader.frag");
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    grabber.update();
-    
-    if (ofGetFrameNum() % 60) shader.load("", "shader.frag");
+  #ifdef _USE_LIVE_VIDEO
+  grabber.update();
+  #else
+  video.update();
+  #endif    
+  
+  if (ofGetFrameNum() % 60) shader.load("", "shader.frag");
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    ofSetColor(255);
-    //img.draw(0,0);
+  ofSetColor(255);
+  
+  shader.begin();
+  shader.setUniform1f("time", ofGetElapsedTimef());
+  shader.setUniform2f("mouse", mouseX, mouseY);
+
+  #ifdef _USE_LIVE_VIDEO
+  shader.setUniformTexture("img", grabber, 0);
+  #else
+  shader.setUniformTexture("img", video, 0);
+  #endif    
     
-    shader.begin();
-    shader.setUniform1f("time", ofGetElapsedTimef());
-    shader.setUniform2f("mouse", mouseX, mouseY);
-    shader.setUniformTexture("img", grabber, 0);
-    
-    ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
-    //ofDrawCircle(mouseX,mouseY,100);
-    shader.end();
-    
+  ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
+  //ofDrawCircle(mouseX,mouseY,100);
+  shader.end();
+  
 }
 
 //--------------------------------------------------------------

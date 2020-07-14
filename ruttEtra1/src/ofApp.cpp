@@ -3,34 +3,56 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    grabber.listDevices();
-    grabber.setDeviceID(0);
-    
-    grabber.setup(640, 480);
-    
+  #ifdef _USE_LIVE_VIDEO
+  grabber.listDevices();
+  grabber.setDeviceID(0);
+  grabber.setup(640, 480);
+  #else
+  video.setPixelFormat(OF_PIXELS_RGB);
+  video.load("input.mp4");
+  video.setLoopState(OF_LOOP_NORMAL);
+  video.play();
+  #endif
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    grabber.update();
+  #ifdef _USE_LIVE_VIDEO
+  grabber.update();
+  #else
+  video.update();
+  #endif
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    grabber.draw(grabber.getWidth(),0);
-    
-    
-    for (int y = 0; y < grabber.getHeight(); y+=5){
-        ofPolyline line;
-        for (int x = 0; x < grabber.getWidth(); x++){
-            float brightness = grabber.getPixels().getColor(x,y).getBrightness();
-            line.addVertex(x,y + ofMap(brightness, 0, 255, 0, mouseX));
-        }
-        line = line.getSmoothed(10);
-        line.draw();
+  #ifdef _USE_LIVE_VIDEO
+  grabber.draw(grabber.getWidth(),0);
+  
+  for (int y = 0; y < grabber.getHeight(); y+=5){
+    ofPolyline line;
+    for (int x = 0; x < grabber.getWidth(); x++){
+      float brightness = grabber.getPixels().getColor(x,y).getBrightness();
+      line.addVertex(x,y + ofMap(brightness, 0, 255, 0, mouseX));
     }
+    line = line.getSmoothed(10);
+    line.draw();
+  }
+  #else
+  video.draw(video.getWidth(),0);
+
+  for (int y = 0; y < video.getHeight(); y+=5){
+    ofPolyline line;
+    for (int x = 0; x < video.getWidth(); x++){
+      float brightness = video.getPixels().getColor(x,y).getBrightness();
+      line.addVertex(x,y + ofMap(brightness, 0, 255, 0, mouseX));
+    }
+    line = line.getSmoothed(10);
+    line.draw();
+  }
+  #endif
 }
 
 //--------------------------------------------------------------
