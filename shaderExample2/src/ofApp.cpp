@@ -7,7 +7,7 @@ void ofApp::setup(){
   grabber.setup(640,480);
   #else
   video.setPixelFormat(OF_PIXELS_RGB);
-  video.load("input.mp4");
+  video.load("input.mov");
   video.setLoopState(OF_LOOP_NORMAL);
   video.play();
   #endif    
